@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>time</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+    html,body{
+      width: 100%;
+      height: 100%;
+      background: rgb(36 41 46);
+      font-family: system-ui,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+    }
+    .content{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .day{
+      height: 300px;
+      font-size: 200px;
+      font-weight: bold;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .time{
+      height: 400px;
+      font-size: 500px;
+      font-weight: bold;
+      margin-top: 80px;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .time span:nth-child(2){
+      height: 300px;
+      line-height: 240px;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <div class="day">
+      <span class="month" id="month"></span>
+      <span>月</span>
+      <span class="date" id="date"></span>
+      <span>日</span>
+    </div>
+    <div class="time">
+      <span class="hour" id="hour"></span>
+      <span>:</span>
+      <span class="minute" id="minute"></span>
+    </div>
+  </div>
+
+  <script>
+
+    (function(){
+      const $month = document.getElementById('month')
+      const $date = document.getElementById('date')
+      const $hour = document.getElementById('hour')
+      const $minute = document.getElementById('minute')
+
+      setTime($month, $date, $hour, $minute)
+      setInterval(() => {
+        setTime($month, $date, $hour, $minute)
+      }, 1000)
+    })();
+
+    function setTime ($month, $date, $hour, $minute) {
+      let [month, date, hour, minute] = getTime()
+      $month.innerHTML = month
+      $date.innerHTML = date
+      $hour.innerHTML = hour
+      $minute.innerHTML = minute
+    }
+    function getTime () {
+      let time = new Date()
+      let month = (time.getMonth() + 1).toString().padStart(2, '0')
+      let date = time.getDate().toString().padStart(2, '0')
+      let hour = time.getHours().toString().padStart(2, '0')
+      let minute = time.getMinutes().toString().padStart(2, '0')
+      return [month, date, hour, minute]
+    }
+  </script>
+</body>
+</html>
